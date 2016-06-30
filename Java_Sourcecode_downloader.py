@@ -6,14 +6,8 @@ Downloads the Java source code from grepcode.com for the methods present
 in the file you run the script on. 
 '''
 
-# website used to get source code 
-website = "http://grepcode.com"
 
-# query url used to get source code 
-url = "http://grepcode.com/search/?query="
-
-
-def downloadSourcecode(methodName):
+def downloadSourcecode(methodName, url, website):
 
 	# make the query using the method name 
 	url = url + methodName
@@ -44,7 +38,7 @@ def downloadSourcecode(methodName):
 	rawDownloadLink = soup.find("a", title = "Download file")
 
 	# separate "../" from the new url 
-	downloadLinkHolder = rawDownloadLink.split("../")
+	downloadLinkHolder = str(rawDownloadLink).split("..")
 
 	# last index in downloadLinkHolder is what we need
 	# add full website url to get the correct download link 
@@ -70,6 +64,13 @@ def downloadSourcecode(methodName):
 
 def main():
 
+	# website used to get source code 
+	website = "http://grepcode.com"
+
+	# query url used to get source code 
+	url = "http://grepcode.com/search/?query="
+
+
 	fileName = raw_input("Pleae enter the name of the file you want to read: ")
 	
 	# make a file object with read mode that reads all methods from the file 
@@ -78,7 +79,7 @@ def main():
 	# loop over all the lines/methods in the file 
 	for line in methodFile:
 		if line != "\n":
-			downloadSourcecode(line)
+			downloadSourcecode(line, url, website)
 			print "Source code for " + line + " has been downloaded!"
 
 
