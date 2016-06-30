@@ -13,7 +13,7 @@ website = "http://grepcode.com"
 url = "http://grepcode.com/search/?query="
 
 
-def firstStage(methodName):
+def downloadSourcecode(methodName):
 
 	# make the query using the method name 
 	url = url + methodName
@@ -65,3 +65,21 @@ def firstStage(methodName):
 		finalFile.write(chunk)
 
 	finalFile.close()
+
+
+
+def main():
+
+	fileName = raw_input("Pleae enter the name of the file you want to read: ")
+	
+	# make a file object with read mode that reads all methods from the file 
+	methodFile = open(fileName, "r")
+
+	# loop over all the lines/methods in the file 
+	for line in methodFile:
+		if line != "\n":
+			downloadSourcecode(line)
+			print "Source code for " + line + " has been downloaded!"
+
+
+if __name__ == "__main__": main()
