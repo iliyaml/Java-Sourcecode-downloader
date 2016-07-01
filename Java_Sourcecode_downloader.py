@@ -35,6 +35,7 @@ def downloadSourcecode(methodName, url, website):
 
 	soup = BeautifulSoup(secondRequest.content, "html.parser")
 
+	# get the first link as that's what we are intereseted in
 	rawDownloadLink = soup.find("a", title = "Download file")
 
 	# separate "../" from the new url 
@@ -70,7 +71,7 @@ def main():
 	# query url used to get source code 
 	url = "http://grepcode.com/search/?query="
 
-
+	# file that contains methods whose source code you want to download
 	fileName = raw_input("Pleae enter the name of the file you want to read: ")
 	
 	# make a file object with read mode that reads all methods from the file 
